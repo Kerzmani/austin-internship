@@ -1,9 +1,28 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 
 const ExploreItems = () => {
+  const [nfts, setNfts] = useState();
+
+  async function fetchNFT() {
+    const { data } = await axios.get(
+      "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
+    );
+    setNfts(data);
+    console.log(data);
+  }
+
+  useEffect(() => {
+    fetchNFT();
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    //Does this work?
+  }, []);
   return (
     <>
       <div>
