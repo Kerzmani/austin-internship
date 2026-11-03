@@ -1,4 +1,16 @@
 {
+  "eslintConfig": {
+  "extends": [
+    "react-app",
+    "react-app/jest"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.js", "**/*.jsx"],
+      "rules": {}
+    }
+  ]
+},
   "name": "nft-marketplace",
   "version": "0.1.0",
   "private": true,
@@ -24,8 +36,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
