@@ -15145,7 +15145,7 @@ a.btn-slider:hover {
   margin: 0 6px;
   display: inline-block;
   zoom: 1;
-  *display: inline;
+  display: inline;
 }
 
 .testi-slider .flex-control-paging li a {
@@ -16714,3 +16714,67 @@ img {
 .no-cursor {
   cursor: not-allowed;
 }
+
+/* ============================== */
+/* Hot Collections Slider Buttons */
+/* ============================== */
+
+.slider-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: solid 2px var(--secondary-color);
+  background: transparent;
+  color: var(--secondary-color);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  outline: none;
+}
+
+.slider-button:hover {
+  background: var(--secondary-color);
+  color: #ffffff;
+  -webkit-box-shadow: 2px 2px 20px 0px rgba(var(--secondary-color-rgb), 0.5);
+  -moz-box-shadow: 2px 2px 20px 0px rgba(var(--secondary-color-rgb), 0.5);
+  box-shadow: 2px 2px 20px 0px rgba(var(--secondary-color-rgb), 0.5);
+}
+
+.slider-button:active {
+  transform: scale(0.95);
+}
+
+/* ============================== */
+/* Hot Collections Responsive     */
+/* ============================== */
+
+#section-collections .keen-slider__slide {
+  padding: 0 5px;
+}
+
+#section-collections .nft_coll {
+  height: 100%;
+}
+
+@media (max-width: 767px) {
+  #section-collections .nft_wrap {
+    height: 260px;
+  }
+
+  #section-collections .slider-button {
+    width: 34px;
+    height: 34px;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #section-collections .nft_wrap {
+    height: 220px;
+  }
+}
+

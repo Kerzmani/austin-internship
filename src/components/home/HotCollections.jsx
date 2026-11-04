@@ -14,10 +14,24 @@ const HotCollections = () => {
   
   const [sliderRef, sliderInstance] = useKeenSlider({
     slides: {
-      perView: 4,
-      spacing: 15,
+      perView: 1,
+      spacing: 10,
     },
     loop: true,
+    breakpoints: {
+      "(min-width: 768px)": {
+        slides: {
+          perView: 2,
+          spacing: 15,
+        },
+      },
+      "(min-width: 992px)": {
+        slides: {
+          perView: 4,
+          spacing: 15,
+        },
+      },
+    },
   });
 
   async function fetchNFTS() {
@@ -55,56 +69,60 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div style={{ display: "flex", alignItems: "center", gap: "10px"}}>
-          <button
-            onClick={() => sliderInstance.current?.prev()}
-            className="slider-button prev-button"
-          >
-            Prev
-          </button>
-          <div ref={sliderRef} className="keen-slider">
-            {nfts.map((nft, index) => (
-              <div
-                className="col-lg-3 col-md-6 col-sm-6 col-xs-12 keen-slider__slide"
-                key={index}
+          {nfts.length > 0 && (
+            <div className="col-12" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+              <button
+                onClick={() => sliderInstance.current?.prev()}
+                className="slider-button prev-button"
               >
-                <div className="nft_coll">
-                  <div className="nft_wrap">
-                    <Link to="/item-details">
-                      <img
-                        src={nft.nftImage || nft.image || nftImage}
-                        className="lazy img-fluid"
-                        alt=""
-                      />
-                    </Link>
+                <i className="fa fa-chevron-left"></i>
+              </button>
+              <div ref={sliderRef} className="keen-slider" style={{ flex: 1, minWidth: 0 }}>
+                {nfts.map((nft, index) => (
+                  <div
+                    className="keen-slider__slide"
+                    key={index}
+                  >
+                    <div className="nft_coll">
+                      <div className="nft_wrap">
+                        <Link to="/item-details">
+                          <img
+                            src={nft.nftImage || nft.image || nftImage}
+                            className="lazy img-fluid"
+                            alt=""
+                          />
+                        </Link>
+                      </div>
+                      <div className="nft_coll_pp">
+                        <Link to="/author">
+                          <img
+                            className="lazy pp-coll"
+                            src={nft.authorImage}
+                            alt=""
+                          />
+                        </Link>
+                        <i className="fa fa-check"></i>
+                      </div>
+                      <div className="nft_coll_info">
+                        <Link to="/explore">
+                          <h4>
+                            {nft.title || nft.name || "Untitled Collection"}
+                          </h4>
+                        </Link>
+                        <span>ERC-{nft.code}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="nft_coll_pp">
-                    <Link to="/author">
-                      <img
-                        className="lazy pp-coll"
-                        src={nft.authorImage}
-                        alt=""
-                      />
-                    </Link>
-                    <i className="fa fa-check"></i>
-                  </div>
-                  <div className="nft_coll_info">
-                    <Link to="/explore">
-                      <h4>{nft.title || nft.name || "Untitled Collection"}</h4>
-                    </Link>
-                    <span>ERC-{nft.code}</span>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-          <button
-            onClick={() => sliderInstance.current?.next()}
-            className="slider-button next-button"
-          >
-            Next
-          </button>
-          </div>
+              <button
+                onClick={() => sliderInstance.current?.next()}
+                className="slider-button next-button"
+              >
+                <i className="fa fa-chevron-right"></i>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
