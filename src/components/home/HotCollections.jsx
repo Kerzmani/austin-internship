@@ -6,11 +6,13 @@ import nftImage from "../../images/nftImage.jpg";
 import KeenSlider from 'keen-slider'; 
 import { useKeenSlider } from 'keen-slider/react';
 import 'keen-slider/keen-slider.min.css';
+import Skeleton from '../UI/Skeleton';
 
 
 const HotCollections = () => {
 
   const [nfts, setNfts] = useState([]);
+  const [loading,setLoading] = useState(true);
   
   const [sliderRef, sliderInstance] = useKeenSlider({
     slides: {
@@ -46,6 +48,8 @@ const HotCollections = () => {
     } catch (error) {
       console.error("Failed to fetch NFTs:", error);
       setNfts([]);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -59,7 +63,55 @@ const HotCollections = () => {
     window.scrollTo(0, 0);
    
   }, []);
-  return (
+
+  if (loading) {
+    return (
+      <section id="section-collections" className="no-bottom">
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-12">
+              <div className="text-center">
+                <Skeleton width="250px" height="40px" borderRadius="4px" />
+                <div style={{ marginTop: "10px" }}>
+                  <Skeleton width="80px" height="4px" borderRadius="2px" />
+                </div>
+              </div>
+            </div>
+            <div className="col-12" style={{ display: "flex", alignItems: "center", gap: "10px", marginTop: "40px" }}>
+              <div style={{ width: "40px", height: "40px", flexShrink: 0 }}>
+                <Skeleton width="40px" height="40px" borderRadius="50%" />
+              </div>
+              <div style={{ display: "flex", gap: "15px", flex: 1, minWidth: 0 }}>
+                {new Array(4).fill(0).map((_, index) => (
+                  <div key={index} style={{ flex: 1, minWidth: 0 }}>
+                    <div className="nft_coll">
+                      <div className="nft_wrap">
+                        <Skeleton width="100%" height="200px" borderRadius="8px" />
+                      </div>
+                      <div className="nft_coll_pp">
+                        <Skeleton width="50px" height="50px" borderRadius="50%" />
+                      </div>
+                      <div className="nft_coll_info">
+                        <Skeleton width="70%" height="20px" borderRadius="4px" />
+                        <div style={{ marginTop: "8px" }}>
+                          <Skeleton width="50%" height="14px" borderRadius="4px" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ width: "40px", height: "40px", flexShrink: 0 }}>
+                <Skeleton width="40px" height="40px" borderRadius="50%" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return nfts.length > 0 ? (
     <section id="section-collections" className="no-bottom">
       <div className="container">
         <div className="row">
@@ -126,6 +178,8 @@ const HotCollections = () => {
         </div>
       </div>
     </section>
+  ) : (
+    "NFT unavailable"
   );
 };
 
