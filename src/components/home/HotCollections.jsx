@@ -130,6 +130,7 @@ const HotCollections = () => {
                 <i className="fa fa-chevron-left"></i>
               </button>
               <div ref={sliderRef} className="keen-slider" style={{ flex: 1, minWidth: 0 }}>
+                
                 {nfts.map((nft, index) => (
                   <div
                     className="keen-slider__slide"
